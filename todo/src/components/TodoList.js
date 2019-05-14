@@ -27,7 +27,7 @@ class TodoList extends React.Component {
     return (
       <div>
         <ul>
-          {this.state.map(todo => (
+          {this.props.todoList.map(todo => (
             <TodoItem todo={todo} />
           ))}
         </ul>
@@ -48,7 +48,7 @@ class TodoList extends React.Component {
 };
 
 const mapPropsToState = state => ({
-  todoList: state.todo
+  todoList: state.todos
 })
 
 export default connect(mapPropsToState, { addTodo, toggleComplete })(TodoList);
