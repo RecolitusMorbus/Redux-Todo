@@ -13,7 +13,7 @@ const reducer = (state = iniState, action) => {
       return {
         ...state,
         todos: [
-          ...state.todo,
+          ...state.todos,
           { task: action.payload, id: Date.now(), complete: false }
         ]
       };
