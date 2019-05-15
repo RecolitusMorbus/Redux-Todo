@@ -5,10 +5,7 @@ import { connect } from 'react-redux';
 const TodoItem = props => {
   return (
     <div>
-      <li
-        onClick={() => props.toggleComplete(props.todo.id)}
-        style={ !props.todo.completed ? null : style }
-      >
+      <li>
         {props.todo.task}
       </li>
     </div>
@@ -16,7 +13,3 @@ const TodoItem = props => {
 }
 
 export default connect(null, { toggleComplete })(TodoItem);
-
-const style = {
-  textDecoration: 'line-through'
-}

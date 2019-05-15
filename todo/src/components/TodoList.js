@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addTodo, toggleComplete } from '../actions';
-import TodoItem from './TodoItem';
+// import TodoItem from './TodoItem';
+// import AddTodo from './AddTodo';
 
 class TodoList extends React.Component {
   state = {
@@ -9,46 +10,81 @@ class TodoList extends React.Component {
   };
 
   changeHandler = e => {
-    // this.setState({ [e.target.name]: e.target.value });
-    this.setState({ newTodo: e.target.value });
-  };
+    this.setState({ newTodo: e.target.value })
+  }
 
-  todoAdder = e => {
+  addTodo = e => {
     e.preventDefault();
     this.props.addTodo(this.state.newTodo);
     this.setState({ newTodo: '' });
   };
 
-  completeToggler = id => {
+  toggleComplete = id => {
     this.props.toggleComplete(id);
   };
 
   render() {
     return (
       <div>
-        <ul>
-          {this.props.todoList.map(todo => (
-            <TodoItem todo={todo} />
+          {this.props.todos &&
+            this.props.todos.map(todo => (
+            <h4 onClick={this.toggleComplete(todo.id)} key={todo.id}>
+              {todo.task}
+            </h4>
           ))}
-        </ul>
         <div>
           <input
             type="text"
-            name="newTodo"
             placeholder="New Task"
             value={this.state.newTodo}
             onChange={this.changeHandler}
-            required
           />
-          <button onSubmit={this.todoAdder}>Add Task</button>
+          <button onClick={this.addTodo}>Add Task</button>
         </div>
       </div>
     );
   };
 };
 
-const mapPropsToState = state => ({
-  todoList: state.todos
+// class TodoList extends React.Component {
+//   state = {
+//     newTodo: ''
+//   };
+
+//   addTodo = e => {
+//     e.preventDefault();
+//     this.props.addTodo(this.state.newTodo);
+//     this.setState({ newTodo: '' });
+//   };
+
+//   toggleComplete = id => {
+//     this.props.toggleComplete(id);
+//   };
+
+//   render() {
+//     return (
+//       <div>
+//         <ul>
+//           {this.props.todos &&
+//             this.props.todos.map(todo => (
+//             <TodoItem
+//               onClick={this.toggleComplete}
+//               key={todo.id}
+//               todo={todo}
+//             />
+//           ))}
+//         </ul>
+//         <AddTodo
+//           addTodo={this.addTodo}
+//           newTodo={this.newTodo}
+//         />
+//       </div>
+//     );
+//   };
+// };
+
+const mapStateToProps = state => ({
+  todos: state.todos
 })
 
-export default connect(mapPropsToState, { addTodo, toggleComplete })(TodoList);
+export default connect(mapStateToProps, { addTodo, toggleComplete })(TodoList);

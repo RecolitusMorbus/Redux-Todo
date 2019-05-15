@@ -1,10 +1,10 @@
 export const ADD_TODO = 'ADD_TODO';
 export const TOGGLE_COMPLETE = 'TOGGLE_COMPLETE';
 
-export const addTodo = task => {
+export const addTodo = newTodo => {
   return {
     type: ADD_TODO,
-    payload: task
+    payload: newTodo
   };
 };
 

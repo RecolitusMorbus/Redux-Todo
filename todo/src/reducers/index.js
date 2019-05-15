@@ -8,33 +8,27 @@ const iniState = {
 };
 
 const reducer = (state = iniState, action) => {
-  switch(action.payload) {
+  switch(action.type) {
     case ADD_TODO:
-      const newTodo = {
-        task: action.payload,
-        id: Date.now(),
-        complete: false,
-      }
       return {
         ...state,
-        todos: [...state.todo, newTodo]
+        todos: [
+          ...state.todo,
+          { task: action.payload, id: Date.now(), complete: false }
+        ]
       };
     case TOGGLE_COMPLETE:
-      const toggleComplete = {
+      return {
         ...state,
-        todo: state.todo.map(todo => {
+        todos: state.todos.map(todo => {
           if (todo.id === action.payload) {
             return {
-              ...state,
-              completed: !todo.completed
+              ...todo,
+              todoComplete: !todo.todoComplete
             };
           };
           return todo;
         })
-      };
-      return {
-        ...state,
-        todo: toggleComplete
       };
     default:
       return state;
