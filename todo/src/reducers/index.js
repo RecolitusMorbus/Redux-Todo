@@ -2,8 +2,8 @@ import { ADD_TODO, TOGGLE_COMPLETE } from '../actions';
 
 const iniState = {
   todos: [
-    {task: 'Create functional To-do List.', id: 34782356, completed: false},
-    {task: 'Bless the rains down in \'Africa\' with Todo.', id: 677802, completed: false}
+    {task: 'Create functional To-do List.', id: 34782356, complete: false},
+    {task: 'Bless the rains down in \'Africa\' with Todo.', id: 677802, complete: false}
   ]
 };
 
@@ -24,9 +24,9 @@ const reducer = (state = iniState, action) => {
           if (todo.id === action.payload) {
             return {
               ...todo,
-              todoComplete: !todo.todoComplete
+              complete: !todo.complete
             };
-          };
+          }
           return todo;
         })
       };
